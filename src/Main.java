@@ -1,7 +1,6 @@
 import java.net.*;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 import com.googlecode.lanterna.*;
@@ -12,12 +11,9 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
 public class Main {
     public static void main(String[] args) throws Exception {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
         Field game = new Field();
          /*
 
@@ -100,7 +96,7 @@ public class Main {
                     } else if (character == 's') { // s is for show (uncover)
                         if (game.getCell(cellIndex[1], cellIndex[0]).getValue() == 0) {
                             game.ifEmpty(game.getCell(cellIndex[1], cellIndex[0]));
-                        } else if  (game.getCell(cellIndex[1], cellIndex[0]).getValue() == -1) {
+                        } else if (game.getCell(cellIndex[1], cellIndex[0]).getValue() == -1) {
                             game.getCell(cellIndex[1], cellIndex[0]).uncover();
                             game.printField(screen, textGraphics, startPosition);
                             textGraphics.putString(headerPosition, lost);
@@ -195,14 +191,21 @@ public class Main {
         public void uncover() {
             this.uncovered = true;
         }
-        public void flag() {this.flagged = !this.flagged;}
-        private int getValue() {return this.value;}
+
+        public void flag() {
+            this.flagged = !this.flagged;
+        }
+
+        private int getValue() {
+            return this.value;
+        }
     }
 
 
     public static class Field {
         private Cell[][] field;
         boolean won;
+
         //set up the field
         private Field() {
             field = new Cell[9][9];
@@ -227,18 +230,17 @@ public class Main {
                     field[x][y].value = -1;
                     //set numbers
                     for (int j = -1; j < 2; j++) {
-                        for  (int k = -1; k < 2; k++) {
+                        for (int k = -1; k < 2; k++) {
                             if (j == 0 && k == 0) {
                                 continue;
                             }
 
-                            if (0 <= x+j && x+j < 9 && 0 <= y+k && y+k < 9 && field[x+j][y+k].value != -1) {
-                                field[x+j][y+k].value += 1;
+                            if (0 <= x + j && x + j < 9 && 0 <= y + k && y + k < 9 && field[x + j][y + k].value != -1) {
+                                field[x + j][y + k].value += 1;
                             }
                         }
                     }
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     System.out.println(e);
                 }
 
@@ -300,11 +302,16 @@ public class Main {
             screen.refresh();
         }
 
-        public Cell getCell(int x, int y) {return  field[x][y];}
-        public boolean getWon() {return won;}
+        public Cell getCell(int x, int y) {
+            return field[x][y];
+        }
+
+        public boolean getWon() {
+            return won;
+        }
 
         //get a true random number for the mines
-        private static int random() throws Exception{
+        private static int random() throws Exception {
             URI uri = new URI("https://www.random.org/integers/?num=1&min=0&max=8&col=1&base=10&format=plain&rnd=new");
             URL url = uri.toURL(); // Safe and non-deprecated way
             BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
@@ -336,4 +343,4 @@ public class Main {
             }
         }
     }
- }
+}
