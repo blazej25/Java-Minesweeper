@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="Minesweeper:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Minesweeper_jar</output-path>
+    <root id="root">
+      <element id="archive" name="Minesweeper.jar">
+        <element id="module-output" name="Minesweeper" />
+      </element>
+      <element id="file-copy" path="$PROJECT_DIR$/lib/lanterna-3.1.3.jar" />
+    </root>
+  </artifact>
+</component>
